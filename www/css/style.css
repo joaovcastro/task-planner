@@ -1,0 +1,45 @@
+/* Empty. Add your own CSS if you like */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.col {
+  text-align: center;
+}
+
+.col i {
+  font-size: 75px;
+  color: grey;
+}
+
+.big-icon {
+  font-size: 150px;
+}
+
+.grey {
+  color: grey;
+}
+
+.centered {
+  text-align: center;
+}
+
+.align-left {
+  text-align: left;
+}
+.btn-invisible {
+  background-color: rgba(255,255,255,0);
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.small-icon {
+  font-size: 30px;
+}
+
+.movie-info {
+  text-align: left;
+}

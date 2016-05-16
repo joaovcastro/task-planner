@@ -1,0 +1,22 @@
+<ion-view view-title="">
+  <ion-content>
+    <div class="centered">
+      <hr>
+      <h2> Movies </h2>
+      <i class="ion-ios-monitor big-icon grey"> </i>
+    <div>
+    <hr>
+
+    <div ng-repeat="movie in movieList" class="align-left">
+      <ion-checkbox ng-model="filter.green"><p>{{movie.name}}</p></ion-checkbox>
+      <hr>
+    </div>
+
+    <div style="position: absolute; bottom: 0px; width: 100%;">
+      <button style="padding-top: 10px; padding-bottom: 10px;" class="button button-full button-dark" ng-click="openModal()">
+          Errase Movies
+      </button>
+    </div>
+
+
+  </ion-content>

@@ -1,0 +1,72 @@
+<ion-view view-title="Task Planner">
+  <ion-nav-buttons side="left" ng-hide="buttonHidden">
+
+
+    <button class="btn-invisible" menu-toggle="left">
+      <i class='ion-ios-plus small-icon grey'> </i>
+    </button>
+  </ion-nav-buttons>
+
+  <ion-content>
+    <ion-list>
+      <div class = "row">
+
+         <div class = "col" ng-controller="WorkCtrl">
+           <button class="btn-invisible" ng-click="gotoWork()">
+             <h4> Work </h4>
+             <i class="ion-ios-book"></i>
+             <p> {{workTaskList.length}} tasks </p>
+           </button>
+         </div>
+
+         <div class = "col" ng-controller="CalendarCtrl">
+           <button class="btn-invisible" ng-click="gotoCalendar()">
+             <h4> Events </h4>
+             <i class="ion-ios-calendar"></i>
+             <p> {{calendarList.length}}  events </p>
+           </button>
+         </div>
+      </div>
+
+      <div class = "row">
+        <div class = "col" ng-controller="GroceriesCtrl">
+          <button class="btn-invisible" ng-click="gotoGroceries()">
+            <h4> Groceries </h4>
+            <i class="ion-soup-can"></i>
+            <p> {{groceriesList.length}} items </p>
+          </button>
+        </div>
+        <div class = "col" ng-controller="MoviesCtrl">
+          <button class="btn-invisible" ng-click="gotoMovies()">
+            <h4>Movies </h4>
+            <i class="ion-ios-monitor"></i>
+            <p> {{movieList.length}} items </p>
+          </button>
+        </div>
+      </div>
+
+      <div class = "row">
+        <div class = "col col-50" ng-controller="OtherCtrl">
+          <button class="btn-invisible" ng-click="gotoOther()">
+            <h4> Other </h4>
+            <i class="ion-shuffle"></i>
+            <p> {{otherList.length}} items </p>
+          </button>
+        </div>
+
+        <div class = "col col-50" ng-controller="OtherCtrl">
+          <button class="btn-invisible" ng-click="gotoOther()">
+            <h4> Important </h4>
+            <i class="ion-ios-star"></i>
+            <p> See starred items </p>
+          </button>
+        </div>
+
+      </div>
+
+    </ion-list>
+  </ion-content>
+
+
+
+</ion-view>
