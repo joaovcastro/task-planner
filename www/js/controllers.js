@@ -1,21 +1,9 @@
 angular.module('taskPlanner.controllers', [])
 
-.controller('TaskPlannerCtrl', function($scope, $ionicModal, $state, StorageService) {
+.controller('TaskPlannerCtrl', function($scope, $ionicModal, $state) {
 
-   // LocalStorage
-   $scope.things = StorageService.getAll();
-
-   $scope.add = function (newThing) {
-     StorageService.add(newThing);
-   };
-
-   $scope.remove = function (thing) {
-     StorageService.remove(thing);
-   };
-
-   // Changing State
-   $scope.gotoEntertainment = function() {
-     $state.go('app.entertainment');
+   $scope.gotoToday = function() {
+     $state.go('app.today');
    }
 
    $scope.gotoWork = function() {
@@ -40,53 +28,55 @@ angular.module('taskPlanner.controllers', [])
 
 })
 
+.controller('TodayCtrl', function($scope, StorageService) {
 
-.controller('EntertainmentCtrl', function($scope) {
+  $scope.todayList = StorageService.getAllToday();
+  $scope.listCanSwipe = true;
 
-    $scope.entertainmentTaskList = [
-    {name:"The Matrix"},
-    {name:"Deadpool"},
-    {name:"Captain America: Civil War"}
-  ]
+  $scope.removeTask = function (task) {
+    console.log("delete work: " + task);
+    StorageService.removeToday(task);
+  }
 })
 
 .controller('WorkCtrl', function($scope, StorageService) {
 
-    $scope.workTasks = StorageService.getAllWork();
+  $scope.workList = StorageService.getAllWork();
+  $scope.listCanSwipe = true;
+
+  $scope.removeTask = function (task) {
+    console.log("delete work: " + task.name);
+    StorageService.removeWork(task);
+  }
 })
 
-.controller('GroceriesCtrl', function($scope) {
+.controller('GroceriesCtrl', function($scope, StorageService) {
 
-    $scope.groceriesList = [
-    {
-      name:"Tomato",
-      amount: '4'
-    },
-    {name:"Onions",
-    amount: '4'},
-    {name:"Cocaine",
-    amount: '12'},
-    {name:"Cyrup",
-    amount: '4'},
-    {name:"Giraffe",
-    amount: '6'}
-  ]
+  $scope.groceriesList = StorageService.getAllGroceries();
+  $scope.listCanSwipe = true;
+
+  $scope.removeTask = function (item) {
+    console.log("delete item: " + item.item);
+    StorageService.removeGroceries(item);
+  }
 })
 
-.controller('EventsCtrl', function($scope) {
+.controller('EventsCtrl', function($scope, StorageService) {
 
-    $scope.calendarList = [
-    {name:"Finish Something"},
-    {name:"Do this"},
-    {name:"Do that"},
-    {name:"Do Other"}
-  ]
+  $scope.eventList = StorageService.getAllEvents();
+  $scope.listCanSwipe = true;
+
+  $scope.removeTask = function (task) {
+    console.log("delete event: " + task.name);
+    StorageService.removeEvent(task);
+  }
+
 })
 
 .controller('OtherCtrl', function($scope, StorageService) {
 
   $scope.otherList = StorageService.getAllOther();
-  $scope.listCanSwipe = true
+  $scope.listCanSwipe = true;
 
   $scope.removeTask = function (task) {
     console.log("delete: " + task);
@@ -95,15 +85,15 @@ angular.module('taskPlanner.controllers', [])
 
 })
 
-.controller('MoviesCtrl', function($scope, $http, Movies) {
+.controller('MoviesCtrl', function($scope, $http, Movies, StorageService) {
 
-    $scope.movieList = [
-    {name:"Mean Girls"},
-    {name:"Jaws"},
-    {name:"WWE RAW"},
-    {name:"WWE Smackdown"},
-    {name:"WWE NXT"}
-  ];
+  $scope.movieList = StorageService.getAllMovies();
+  $scope.listCanSwipe = true;
+
+  $scope.removeTask = function (task) {
+    console.log("delete movie: " + task.Title);
+    StorageService.removeMovie(task);
+  }
 
   $scope.searchmovie = 'no';
 	$scope.showloader = 'no';
@@ -126,6 +116,35 @@ angular.module('taskPlanner.controllers', [])
 })
 
 .controller('AppCtrl', function($scope, $ionicModal, $state, StorageService) {
+
+    /*
+       Regarding 'Today'
+    */
+
+   // Modal for Today
+   $scope.openTodayModal = function() {
+      $scope.todayModal.show();
+   };
+
+   $scope.closeTodayModal = function() {
+      $scope.todayModal.hide();
+   };
+
+   $ionicModal.fromTemplateUrl('templates/new-today.html', {
+       scope: $scope,
+       animation: 'slide-in-up',
+    }).then(function(modal) {
+       $scope.todayModal = modal;
+    });
+
+    // Add new 'Today' event
+    $scope.todayTasks = StorageService.getAllToday();
+    $scope.todayItemCount = $scope.todayTasks.length;
+
+    $scope.createTodayTask = function(task) {
+      StorageService.addToday(task);
+    }
+
 
     /*
        Regarding 'Work'

@@ -16,6 +16,7 @@ angular.module('taskPlanner.services', [])
 .factory ('StorageService', function ($localStorage) {
 
 	$localStorage = $localStorage.$default({
+		today: [],
 		work: [],
 		events: [],
 		groceries: [],
@@ -23,17 +24,18 @@ angular.module('taskPlanner.services', [])
 		other: []
 	});
 
-	var _getAll = function () {
-		console.log($localStorage.other);
-	  return $localStorage.other;
-	};
 
-	var _add = function (thing) {
-	  $localStorage.things.push(thing);
+	// Regarding 'Today'
+	var _getAllToday = function() {
+		return $localStorage.today;
 	}
 
-	var _remove = function (thing) {
-	  $localStorage.things.splice($localStorage.things.indexOf(thing), 1);
+	var _addToday = function(task) {
+		$localStorage.today.push(task);
+	}
+
+	var _removeToday = function (task) {
+		$localStorage.today.splice($localStorage.today.indexOf(task), 1);
 	}
 
 	// Regarding 'Work'
@@ -42,7 +44,11 @@ angular.module('taskPlanner.services', [])
 	}
 
 	var _addWork = function(name, deadline) {
-		$localStorage.work.push(JSON.stringify({name, deadline}));
+		$localStorage.work.push({"name": name, "deadline":deadline});
+	}
+
+	var _removeWork = function (name, date) {
+		$localStorage.work.splice($localStorage.work.indexOf(name), 1);
 	}
 
 	// Regarding 'Groceries'
@@ -51,7 +57,11 @@ angular.module('taskPlanner.services', [])
 	}
 
 	var _addGroceries = function(item, amount) {
-		$localStorage.groceries.push(JSON.stringify({item, amount}));
+		$localStorage.groceries.push({"item": item, "amount": amount});
+	}
+
+	var _removeGroceries = function (item) {
+	  $localStorage.groceries.splice($localStorage.groceries.indexOf(item), 1);
 	}
 
 	// Regarding 'Movie' tasks
@@ -63,13 +73,21 @@ angular.module('taskPlanner.services', [])
 		$localStorage.movies.push(task);
 	}
 
+	var _removeMovie = function (movie) {
+	  $localStorage.movies.splice($localStorage.movies.indexOf(movie), 1);
+	}
+
 	// Regarding 'Event' tasks
 	var _getAllEvents = function() {
 		return $localStorage.events;
 	}
 
 	var _addEvent = function(name, date) {
-		$localStorage.events.push(JSON.stringify({name, date}));
+		$localStorage.events.push({"name":name, "date":date});
+	}
+
+	var _removeEvent = function (name, date) {
+	  $localStorage.events.splice($localStorage.events.indexOf(name), 1);
 	}
 
 	// Regarding 'Other' tasks
@@ -86,21 +104,26 @@ angular.module('taskPlanner.services', [])
 	}
 
 	return {
-    getAll: _getAll,
-    add: _add,
-    remove: _remove,
+		// regarding 'Today'
+		getAllToday: _getAllToday,
+		addToday: _addToday,
+		removeToday: _removeToday,
 		// regarding 'Work'
 		getAllWork: _getAllWork,
 		addWork: _addWork,
+		removeWork: _removeWork,
 		// regarding 'Events'
 		getAllEvents: _getAllEvents,
 		addEvent: _addEvent,
+		removeEvent: _removeEvent,
 		// regarding 'Groceries'
 		getAllGroceries: _getAllGroceries,
 		addGroceries: _addGroceries,
+		removeGroceries: _removeGroceries,
 		// Regarding 'Movie'
 		getAllMovies: _getAllMovies,
 		addMovie: _addMovie,
+		removeMovie: _removeMovie,
 		// regarding 'Other'
 		getAllOther: _getAllOther,
 		addOther: _addOther,

@@ -7,16 +7,15 @@
     <div>
     <hr>
 
-    <div ng-repeat="task in workTasks" class="align-left">
-      <ion-checkbox ng-model="filter.green"><p>{{task.name}}</p></ion-checkbox>
-      <hr>
-    </div>
+    <ion-list can-swipe="listCanSwipe">
+        <ion-item ng-repeat="work in workList" style="text-align: left">
+        <h2>{{work.name}}</h2>
+        <p> until {{work.deadline | date:'dd-MM-yyyy'}} </p>
+        <ion-option-button class="button-assertive" ng-click="removeTask(work)">
+          Delete
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
 
   </ion-content>
-
-  <div style="position: absolute; bottom: 0px; width: 100%;">
-    <button style="padding-top: 10px; padding-bottom: 10px;" class="button button-full button-dark" ng-click="openModal()">
-        Errase Tasks
-    </button>
-  </div>
 </ion-view>

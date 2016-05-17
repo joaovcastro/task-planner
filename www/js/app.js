@@ -59,12 +59,12 @@ angular.module('taskPlanner', ['ionic', 'ngStorage', 'taskPlanner.controllers', 
       }
     })
 
-    .state('app.entertainment', {
-      url: '/entertainment',
+    .state('app.today', {
+      url: '/today',
       views: {
         'menuContent': {
-          templateUrl: 'templates/entertainment.html',
-          controller: 'EntertainmentCtrl'
+          templateUrl: 'templates/today.html',
+          controller: 'TodayCtrl'
         }
       }
     })

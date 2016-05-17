@@ -1,0 +1,31 @@
+<ion-view view-title="">
+  <ion-content>
+    <div class="centered">
+      <hr>
+      <h2> Today </h2>
+      <i class="ion-ios-clock-outline big-icon grey"> </i>
+    </div>
+    <hr>
+
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">Task</span>
+        <input ng-model="task" type="text">
+      </label>
+      <div class="row">
+        <div class="col">
+          <button class="button button-full button-calm" ng-click="createTodayTask(task)">
+            Create
+          </button>
+        </div>
+        <div class="col">
+          <button class = "button button-full button-dark" ng-click = "closeTodayModal()">
+            Dismiss
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </ion-content>
+</ion-view>

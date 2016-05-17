@@ -7,16 +7,22 @@
     <div>
     <hr>
 
-    <div ng-repeat="movie in movieList" class="align-left">
-      <ion-checkbox ng-model="filter.green"><p>{{movie.name}}</p></ion-checkbox>
-      <hr>
-    </div>
-
-    <div style="position: absolute; bottom: 0px; width: 100%;">
-      <button style="padding-top: 10px; padding-bottom: 10px;" class="button button-full button-dark" ng-click="openModal()">
-          Errase Movies
-      </button>
-    </div>
+    <ion-list can-swipe="listCanSwipe">
+        <ion-item ng-repeat="movie in movieList" style="text-align: left">
+        <div class="row"  style="text-align: left">
+          <div class="col col-25">
+            <img ng-src="{{movie.Poster}}" style="width: 100%;">
+          </div>
+          <div class="col col-70">
+            <h2>{{movie.Title}}</h2>
+            <p> {{movie.Year}}
+          </div>
+        </div>
+        <ion-option-button class="button-assertive" ng-click="removeTask(movie)">
+          Delete
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
 
 
   </ion-content>
