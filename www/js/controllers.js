@@ -1,7 +1,19 @@
-angular.module('starter.controllers', [])
+angular.module('taskPlanner.controllers', [])
 
-.controller('TaskPlannerCtrl', function($scope, $ionicModal, $state) {
+.controller('TaskPlannerCtrl', function($scope, $ionicModal, $state, StorageService) {
 
+   // LocalStorage
+   $scope.things = StorageService.getAll();
+
+   $scope.add = function (newThing) {
+     StorageService.add(newThing);
+   };
+
+   $scope.remove = function (thing) {
+     StorageService.remove(thing);
+   };
+
+   // Changing State
    $scope.gotoEntertainment = function() {
      $state.go('app.entertainment');
    }
@@ -14,8 +26,8 @@ angular.module('starter.controllers', [])
      $state.go('app.groceries');
    }
 
-   $scope.gotoCalendar = function() {
-     $state.go('app.calendar');
+   $scope.gotoEvents = function() {
+     $state.go('app.events');
    }
 
    $scope.gotoOther = function() {
@@ -38,14 +50,9 @@ angular.module('starter.controllers', [])
   ]
 })
 
-.controller('WorkCtrl', function($scope) {
+.controller('WorkCtrl', function($scope, StorageService) {
 
-    $scope.workTaskList = [
-    {name:"Finish Something"},
-    {name:"Do this"},
-    {name:"Do that"},
-    {name:"Do Other"}
-  ]
+    $scope.workTasks = StorageService.getAllWork();
 })
 
 .controller('GroceriesCtrl', function($scope) {
@@ -66,7 +73,7 @@ angular.module('starter.controllers', [])
   ]
 })
 
-.controller('CalendarCtrl', function($scope) {
+.controller('EventsCtrl', function($scope) {
 
     $scope.calendarList = [
     {name:"Finish Something"},
@@ -76,14 +83,16 @@ angular.module('starter.controllers', [])
   ]
 })
 
-.controller('OtherCtrl', function($scope) {
+.controller('OtherCtrl', function($scope, StorageService) {
 
-    $scope.otherList = [
-    {name:"Finish Something"},
-    {name:"Do this"},
-    {name:"Do that"},
-    {name:"Do Other"}
-  ]
+  $scope.otherList = StorageService.getAllOther();
+  $scope.listCanSwipe = true
+
+  $scope.removeTask = function (task) {
+    console.log("delete: " + task);
+    StorageService.removeOther(task);
+  }
+
 })
 
 .controller('MoviesCtrl', function($scope, $http, Movies) {
@@ -116,25 +125,11 @@ angular.module('starter.controllers', [])
 	}
 })
 
-.factory('Movies', function($http) {
-	return {
-		get: function(title) {
-			return $http({
-      /*  method: 'GET',
-        url:"http://www.imdb.com/xml/find?json=1&nr=1&nm=on&q=" + title,
-        dataType: 'jsonp',
-        cache: true,
-        jsonp: false,*/
-			//	url: "http://www.omdbapi.com?t="+title+"&y=&plot=full&r=json",
-        url:"http://www.omdbapi.com/?s=" + title,
-	      method: "GET"
-			});
-		}
-	}
-})
+.controller('AppCtrl', function($scope, $ionicModal, $state, StorageService) {
 
-
-.controller('AppCtrl', function($scope, $ionicModal, $state) {
+    /*
+       Regarding 'Work'
+    */
 
    // Modal for work
    $scope.openWorkModal = function() {
@@ -152,6 +147,18 @@ angular.module('starter.controllers', [])
        $scope.workModal = modal;
     });
 
+    // Add new 'Work' event
+    $scope.workTasks = StorageService.getAllWork();
+    $scope.workItemCount = $scope.workTasks.length;
+
+    $scope.createWorkTask = function(name, deadline) {
+      StorageService.addWork(name, deadline);
+    }
+
+    /*
+      Events
+    */
+
    // Modal for events
    $scope.openEventsModal = function() {
       $scope.eventsModal.show();
@@ -168,8 +175,19 @@ angular.module('starter.controllers', [])
        $scope.eventsModal = modal;
     });
 
+    // Add new 'Event'
+    $scope.eventTasks = StorageService.getAllEvents();
+    $scope.eventItemCount = $scope.eventTasks.length;
+    $scope.createEventTask = function(name, date) {
+      StorageService.addEvent(name, date);
+    }
+
+    /*
+      Groceries
+    */
 
    // Modal for groceries
+
    $scope.openGroceriesModal = function() {
       $scope.groceriesModal.show();
    };
@@ -185,6 +203,17 @@ angular.module('starter.controllers', [])
        $scope.groceriesModal = modal;
     });
 
+    // Add new 'Groceries'
+    $scope.groceriesTasks = StorageService.getAllGroceries();
+    $scope.groceriesItemCount = $scope.groceriesTasks.length;
+
+    $scope.createGroceriesTask = function(item, amount) {
+      StorageService.addGroceries(item, amount);
+    }
+
+    /*
+      Movies
+    */
 
    // Modal for Movies
    $scope.openMovieModal = function() {
@@ -202,6 +231,25 @@ angular.module('starter.controllers', [])
        $scope.movieModal = modal;
     });
 
+    // Add new 'Movie' event
+    $scope.movieTasks = StorageService.getAllMovies();
+    $scope.movieItemCount = $scope.movieTasks.length;
+
+    $scope.createMovieTask = function(task) {
+      console.log(task);
+      StorageService.addMovie(task);
+    }
+
+   // State changing stuff
+   $scope.goHome = function() {
+     $state.go('app.task-planner');
+   }
+
+
+    /*
+      Other
+    */
+
     // Modal for Other
     $scope.openOtherModal = function() {
        $scope.otherModal.show();
@@ -218,22 +266,20 @@ angular.module('starter.controllers', [])
         $scope.otherModal = modal;
      });
 
+     // Add new 'Other' event
+     $scope.otherTasks = StorageService.getAllOther();
+     $scope.otherItemCount = $scope.otherTasks.length;
 
-  // State changing stuff
-  $scope.goHome = function() {
-    $state.go('app.task-planner');
-  }
+     $scope.createOtherTask = function(task) {
+       console.log(task);
+       StorageService.addOther(task);
+     }
 
-  // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
+    // State changing stuff
+    $scope.goHome = function() {
+      $state.go('app.task-planner');
+    }
 
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
-  };
 })
 
 

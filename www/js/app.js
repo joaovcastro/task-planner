@@ -1,10 +1,9 @@
-// Ionic Starter App
-
+// Ionic taskPlanner App
 // angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
+// 'taskPlanner' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-// 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'/*, 'starter.services'*/])
+// 'taskPlanner.controllers' is found in controllers.js
+angular.module('taskPlanner', ['ionic', 'ngStorage', 'taskPlanner.controllers', 'taskPlanner.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -90,18 +89,18 @@ angular.module('starter', ['ionic', 'starter.controllers'/*, 'starter.services'*
       }
     })
 
-    .state('app.calendar', {
-      url: '/calendar',
+    .state('app.events', {
+      url: '/events',
       views: {
         'menuContent': {
-          templateUrl: 'templates/calendar.html',
-          controller: 'CalendarCtrl'
+          templateUrl: 'templates/events.html',
+          controller: 'EventsCtrl'
         }
       }
     })
 
     .state('app.other', {
-      url: '/caotherlendar',
+      url: '/other',
       views: {
         'menuContent': {
           templateUrl: 'templates/other.html',

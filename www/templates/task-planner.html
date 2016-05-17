@@ -15,15 +15,15 @@
            <button class="btn-invisible" ng-click="gotoWork()">
              <h4> Work </h4>
              <i class="ion-ios-book"></i>
-             <p> {{workTaskList.length}} tasks </p>
+             <p> {{workItemCount}} tasks </p>
            </button>
          </div>
 
-         <div class = "col" ng-controller="CalendarCtrl">
-           <button class="btn-invisible" ng-click="gotoCalendar()">
+         <div class = "col" ng-controller="EventsCtrl">
+           <button class="btn-invisible" ng-click="gotoEvents()">
              <h4> Events </h4>
              <i class="ion-ios-calendar"></i>
-             <p> {{calendarList.length}}  events </p>
+             <p> {{eventItemCount}}  events </p>
            </button>
          </div>
       </div>
@@ -33,14 +33,14 @@
           <button class="btn-invisible" ng-click="gotoGroceries()">
             <h4> Groceries </h4>
             <i class="ion-soup-can"></i>
-            <p> {{groceriesList.length}} items </p>
+            <p> {{groceriesItemCount}} items </p>
           </button>
         </div>
         <div class = "col" ng-controller="MoviesCtrl">
           <button class="btn-invisible" ng-click="gotoMovies()">
             <h4>Movies </h4>
             <i class="ion-ios-monitor"></i>
-            <p> {{movieList.length}} items </p>
+            <p> {{movieItemCount}}  items </p>
           </button>
         </div>
       </div>
@@ -50,7 +50,7 @@
           <button class="btn-invisible" ng-click="gotoOther()">
             <h4> Other </h4>
             <i class="ion-shuffle"></i>
-            <p> {{otherList.length}} items </p>
+            <p> {{otherItemCount}} items </p>
           </button>
         </div>
 
@@ -63,10 +63,6 @@
         </div>
 
       </div>
-
     </ion-list>
   </ion-content>
-
-
-
 </ion-view>

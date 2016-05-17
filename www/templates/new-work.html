@@ -10,19 +10,19 @@
       <div class="list">
         <label class="item item-input">
           <span class="input-label">Name</span>
-          <input ng-model="newTask.name" type="text">
+          <input ng-model="name" type="text">
         </label>
 
 
         <label class="item item-input">
           <span class="input-label">Deadline</span>
-          <input type="date" ng-model="newTask.date">
+          <input type="date" ng-model="deadline">
         </label>
 
 
         <div class="row">
           <div class="col">
-            <button class="button button-full button-calm" ng-click="createTask(newTask)">
+            <button class="button button-full button-calm" ng-click="createWorkTask(name, deadline)">
               Create
             </button>
           </div>

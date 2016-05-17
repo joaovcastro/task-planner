@@ -1,0 +1,22 @@
+<ion-view view-title="">
+  <ion-content>
+    <div class="centered">
+      <hr>
+      <h2> Events </h2>
+      <i class="ion-ios-calendar big-icon grey"> </i>
+    <div>
+    <hr>
+
+    <div ng-repeat="task in workTaskList" class="align-left">
+      <ion-checkbox ng-model="filter.green"><p>{{task.name}}</p></ion-checkbox>
+      <hr>
+    </div>
+
+  </ion-content>
+
+  <div style="position: absolute; bottom: 0px; width: 100%;">
+    <button style="padding-top: 10px; padding-bottom: 10px;" class="button button-full button-dark" ng-click="openModal()">
+        Errase Tasks
+    </button>
+  </div>
+</ion-view>

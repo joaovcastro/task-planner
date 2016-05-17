@@ -23,7 +23,7 @@
       <ion-spinner icon="rippal" ng-if="showloader == 'yes'"></ion-spinner>
 
           <div class="list card" ng-if="searchmovie == 'yes'">
-            <div class="row item" ng-repeat="result in results">
+            <button class="row item" ng-repeat="result in results" ng-click="createMovieTask(result)">
               <div class="col col-50">
                 <img class="" src="{{ result.Poster }}" style="width: 50%;">
               </div>
@@ -31,7 +31,7 @@
                 <h2> {{result.Title}} </h2>
                 <h3> ({{result.Year}}) </h3>
               </div>
-            </div>
+            </button>
           </div>
    </ion-content>
 </ion-modal-view>
