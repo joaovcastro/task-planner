@@ -115,7 +115,7 @@ angular.module('taskPlanner.controllers', [])
 	}
 })
 
-.controller('AppCtrl', function($scope, $ionicModal, $state, StorageService) {
+.controller('AppCtrl', function($scope, $ionicModal, $state, $window, $timeout, StorageService) {
 
     /*
        Regarding 'Today'
@@ -143,6 +143,8 @@ angular.module('taskPlanner.controllers', [])
 
     $scope.createTodayTask = function(task) {
       StorageService.addToday(task);
+      $scope.closeTodayModal();
+      $scope.todayItemCount++;
     }
 
 
@@ -170,8 +172,10 @@ angular.module('taskPlanner.controllers', [])
     $scope.workTasks = StorageService.getAllWork();
     $scope.workItemCount = $scope.workTasks.length;
 
-    $scope.createWorkTask = function(name, deadline) {
-      StorageService.addWork(name, deadline);
+    $scope.createWorkTask = function(taskName, deadline) {
+      StorageService.addWork(taskName, deadline);
+      $scope.closeWorkModal();
+      $scope.workItemCount++;
     }
 
     /*
@@ -199,6 +203,8 @@ angular.module('taskPlanner.controllers', [])
     $scope.eventItemCount = $scope.eventTasks.length;
     $scope.createEventTask = function(name, date) {
       StorageService.addEvent(name, date);
+      $scope.closeEventsModal();
+      $scope.eventItemCount++;
     }
 
     /*
@@ -228,6 +234,8 @@ angular.module('taskPlanner.controllers', [])
 
     $scope.createGroceriesTask = function(item, amount) {
       StorageService.addGroceries(item, amount);
+      $scope.closeGroceriesModal();
+      $scope.groceriesItemCount++;
     }
 
     /*
@@ -255,15 +263,10 @@ angular.module('taskPlanner.controllers', [])
     $scope.movieItemCount = $scope.movieTasks.length;
 
     $scope.createMovieTask = function(task) {
-      console.log(task);
       StorageService.addMovie(task);
+      $scope.closeMovieModal();
+      $scope.movieItemCount++;
     }
-
-   // State changing stuff
-   $scope.goHome = function() {
-     $state.go('app.task-planner');
-   }
-
 
     /*
       Other
@@ -290,13 +293,14 @@ angular.module('taskPlanner.controllers', [])
      $scope.otherItemCount = $scope.otherTasks.length;
 
      $scope.createOtherTask = function(task) {
-       console.log(task);
        StorageService.addOther(task);
+       $scope.closeOtherModal();
+       $scope.otherItemCount++;
      }
 
     // State changing stuff
     $scope.goHome = function() {
-      $state.go('app.task-planner');
+      $state.go();
     }
 
 })

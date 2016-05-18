@@ -5,6 +5,10 @@
   padding: 0;
 }
 
+ion-content {
+  background-color: #E8E8E8;
+}
+
 .col {
   text-align: center;
 }
@@ -20,6 +24,10 @@
 
 .grey {
   color: grey;
+}
+
+.white {
+  color: white;
 }
 
 .centered {

@@ -10,7 +10,7 @@
       <div class="list">
         <div class="item item-input-inset">
             <label class="item-input-wrapper">
-              <input type="text" placeholder="Enter movie name" id="movie-title">
+              <input type="text" ng-model="titleSearch" placeholder="Enter movie name" id="movie-title">
             </label>
             <button class="button button-small" ng-click="search()">
               Submit
@@ -23,7 +23,7 @@
       <ion-spinner icon="rippal" ng-if="showloader == 'yes'"></ion-spinner>
 
           <div class="list card" ng-if="searchmovie == 'yes'">
-            <button class="row item" ng-repeat="result in results" ng-click="createMovieTask(result)">
+            <button class="row item" ng-repeat="result in results" ng-click="createMovieTask(result); titleSearch=null">
               <div class="col col-50">
                 <img class="" src="{{ result.Poster }}" style="width: 50%;">
               </div>

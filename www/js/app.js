@@ -22,6 +22,7 @@ angular.module('taskPlanner', ['ionic', 'ngStorage', 'taskPlanner.controllers', 
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
+
   $stateProvider
 
   .state('app', {
