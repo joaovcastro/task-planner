@@ -119,8 +119,6 @@ angular.module('taskPlanner', ['ionic', 'ngStorage', 'taskPlanner.controllers', 
         }
       }
     })
-
-
     ;
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/task-planner');

@@ -3,7 +3,7 @@
 
 
     <button class="btn-invisible" menu-toggle="left">
-      <i class='ion-ios-plus small-icon grey'> </i>
+      <i class='ion-ios-plus-outline small-icon header-icon'> </i>
     </button>
   </ion-nav-buttons>
 
@@ -12,17 +12,17 @@
       <div class = "row">
 
         <div class = "col col-50" ng-controller="TodayCtrl">
-          <button class="btn-invisible" ng-click="gotoToday()">
+          <button class="btn-grey" ng-click="gotoToday()">
             <h4> For today </h4>
-            <i class="ion-ios-clock "></i>
+            <i class="ion-ios-clock main-icon"></i>
             <p> {{todayItemCount}} tasks </p>
           </button>
         </div>
 
          <div class = "col" ng-controller="WorkCtrl">
-           <button class="btn-invisible" ng-click="gotoWork()">
+           <button class="btn-grey" ng-click="gotoWork()">
              <h4> Work </h4>
-             <i class="ion-ios-folder"></i>
+             <i class="ion-ios-folder main-icon"></i>
              <p> {{workItemCount}} tasks </p>
            </button>
          </div>
@@ -30,16 +30,16 @@
 
       <div class = "row">
         <div class = "col" ng-controller="EventsCtrl">
-          <button class="btn-invisible" ng-click="gotoEvents()">
+          <button class="btn-grey" ng-click="gotoEvents()">
             <h4> Events </h4>
-            <i class="ion-ios-calendar"></i>
+            <i class="ion-ios-calendar main-icon"></i>
             <p> {{eventItemCount}}  events </p>
           </button>
         </div>
         <div class = "col" ng-controller="GroceriesCtrl">
-          <button class="btn-invisible" ng-click="gotoGroceries()">
+          <button class="btn-grey" ng-click="gotoGroceries()">
             <h4> Groceries </h4>
-            <i class="ion-ios-cart"></i>
+            <i class="ion-ios-cart main-icon"></i>
             <p> {{groceriesItemCount}} items </p>
           </button>
         </div>
@@ -47,16 +47,16 @@
 
       <div class = "row">
         <div class = "col" ng-controller="MoviesCtrl">
-          <button class="btn-invisible" ng-click="gotoMovies()">
+          <button class="btn-grey" ng-click="gotoMovies()">
             <h4>Entertainment </h4>
-            <i class="ion-ios-monitor"></i>
+            <i class="ion-ios-monitor main-icon"></i>
             <p> {{movieItemCount}}  items </p>
           </button>
         </div>
         <div class = "col col-50" ng-controller="OtherCtrl">
-          <button class="btn-invisible" ng-click="gotoOther()">
+          <button class="btn-grey" ng-click="gotoOther()">
             <h4> Other </h4>
-            <i class="ion-shuffle"></i>
+            <i class="ion-shuffle main-icon"></i>
             <p> {{otherItemCount}} items </p>
           </button>
         </div>

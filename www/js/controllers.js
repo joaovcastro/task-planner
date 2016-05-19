@@ -34,7 +34,6 @@ angular.module('taskPlanner.controllers', [])
   $scope.listCanSwipe = true;
 
   $scope.removeTask = function (task) {
-    console.log("delete work: " + task);
     StorageService.removeToday(task);
   }
 })
@@ -45,7 +44,6 @@ angular.module('taskPlanner.controllers', [])
   $scope.listCanSwipe = true;
 
   $scope.removeTask = function (task) {
-    console.log("delete work: " + task.name);
     StorageService.removeWork(task);
   }
 })
@@ -56,7 +54,6 @@ angular.module('taskPlanner.controllers', [])
   $scope.listCanSwipe = true;
 
   $scope.removeTask = function (item) {
-    console.log("delete item: " + item.item);
     StorageService.removeGroceries(item);
   }
 })
@@ -67,7 +64,6 @@ angular.module('taskPlanner.controllers', [])
   $scope.listCanSwipe = true;
 
   $scope.removeTask = function (task) {
-    console.log("delete event: " + task.name);
     StorageService.removeEvent(task);
   }
 
@@ -79,7 +75,6 @@ angular.module('taskPlanner.controllers', [])
   $scope.listCanSwipe = true;
 
   $scope.removeTask = function (task) {
-    console.log("delete: " + task);
     StorageService.removeOther(task);
   }
 
@@ -91,7 +86,6 @@ angular.module('taskPlanner.controllers', [])
   $scope.listCanSwipe = true;
 
   $scope.removeTask = function (task) {
-    console.log("delete movie: " + task.Title);
     StorageService.removeMovie(task);
   }
 
